@@ -1,0 +1,30 @@
+name: Build & Push Ubuntu SSH + Claude Image
+
+# Jalan otomatis tiap kali folder docker-image/ berubah dan di-push ke branch main.
+# Juga bisa dipicu manual lewat tab "Actions" di GitHub (tombol "Run workflow").
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docker-image/**"
+  workflow_dispatch: {}
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Login ke Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build & push image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./docker-image
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ubuntu-ssh-claude:latest
