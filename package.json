@@ -1,0 +1,15 @@
+{
+  "name": "cvps-bot",
+  "version": "1.0.0",
+  "description": "Bot Telegram untuk membuat VPS Railway (Ubuntu SSH + Claude) via /cvps",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "node-telegram-bot-api": "^0.66.0",
+    "node-fetch": "^2.7.0",
+    "dotenv": "^16.4.5"
+  }
+}
